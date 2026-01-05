@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Napping (KOALA)</title>
+
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --text: #1f2937;
+      --muted: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    img {
+      max-width: 420px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 32px;
+    }
+
+    .lore {
+      max-width: 520px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 64px;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      opacity: 0.9;
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .lang {
+      display: none;
+    }
+
+    .lang.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="lang-toggle" id="toggle">
+    PT
+  </div>
+
+  <img src="koala.png" alt="Napping Koala" />
+
+  <div class="lore lang active" id="en">
+    After realizing the universe will end anyway,<br />
+    the Koala chose the only rational response:<br />
+    sleep, eat leaves, and vibe.
+  </div>
+
+  <div class="lore lang" id="pt">
+    Ao perceber que o universo vai acabar de qualquer forma,<br />
+    o Coala escolheu a única resposta racional:<br />
+    dormir, comer folhas e curtir o momento.
+  </div>
+
+  <footer class="lang active" id="en-footer">
+    Napping is existing without haste in a universe that isn’t going anywhere.
+  </footer>
+
+  <footer class="lang" id="pt-footer">
+    Napping é existir sem pressa num universo que não está indo a lugar nenhum.
+  </footer>
+
+  <script>
+    const toggle = document.getElementById("toggle");
+    const en = document.getElementById("en");
+    const pt = document.getElementById("pt");
+    const enFooter = document.getElementById("en-footer");
+    const ptFooter = document.getElementById("pt-footer");
+
+    let current = "en";
+
+    function setLang(lang) {
+      if (lang === "pt") {
+        en.classList.remove("active");
+        enFooter.classList.remove("active");
+        pt.classList.add("active");
+        ptFooter.classList.add("active");
+        toggle.textContent = "EN";
+        current = "pt";
+      } else {
+        pt.classList.remove("active");
+        ptFooter.classList.remove("active");
+        en.classList.add("active");
+        enFooter.classList.add("active");
+        toggle.textContent = "PT";
+        current = "en";
+      }
+    }
+
+    toggle.addEventListener("click", () => {
+      setLang(current === "en" ? "pt" : "en");
+    });
+
+    window.addEventListener("load", () => {
+      setLang("en");
+    });
+  </script>
+
+</body>
+</html>
